@@ -5,13 +5,14 @@ import TodoItem from "../TodoItem/TodoItem";
 import {Box} from "@mui/material";
 
 const TodoList = observer(() => {
+
     return (
         <Box sx={{
             display: "flex",
             flexDirection: "column",
             gap: "1em"
         }}>
-            {Todos.todos.map(todo => <TodoItem todo={todo} key={todo.id}/>)}
+            {Todos.getFilteredTodos(Todos.filter)?.map(todo => <TodoItem todo={todo} key={todo.id}/>)}
         </Box>
     );
 })

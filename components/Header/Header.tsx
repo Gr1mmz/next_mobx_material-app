@@ -1,11 +1,9 @@
 import React from "react";
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import {AppBar, Box, Toolbar, Typography, Button} from "@mui/material";
+import {observer} from "mobx-react-lite";
+import Todos from "../../store/todos";
 
-const Header = () => {
+const Header = observer(() => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -13,13 +11,29 @@ const Header = () => {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         NextJS+MobX ToDo App
                     </Typography>
-                    <Button color="inherit" sx={{minWidth: "auto"}}>All</Button>
-                    <Button color="inherit">Active</Button>
-                    <Button color="inherit">Completed</Button>
+                    <Button
+                        color="inherit"
+                        sx={{minWidth: "auto"}}
+                        onClick={() => Todos.setFilter("all")}
+                    >
+                        All
+                    </Button>
+                    <Button
+                        color="inherit"
+                        onClick={() => Todos.setFilter("active")}
+                    >
+                        Active
+                    </Button>
+                    <Button
+                        color="inherit"
+                        onClick={() => Todos.setFilter("completed")}
+                    >
+                        Completed
+                    </Button>
                 </Toolbar>
             </AppBar>
         </Box>
     );
-};
+});
 
 export default Header;

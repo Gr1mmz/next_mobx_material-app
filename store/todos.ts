@@ -11,21 +11,41 @@ class Todos {
         {"id": 7, "title": "Learn TypeScript", "completed": false},
         {"id": 8, "title": "Learn MobX", "completed": false},
     ];
+    filter: string = "all";
 
     constructor() {
         makeAutoObservable(this);
-    }
+    };
+
+    getFilteredTodos(fil: string) {
+        switch (fil) {
+            case "all":
+                return this.todos
+            case "active":
+                return this.todos.filter(todo => !todo.completed)
+            case "completed":
+                return this.todos.filter(todo => todo.completed)
+        }
+    };
 
     addTodo(todo: Todo) {
         this.todos.push(todo);
-    }
+        this.getFilteredTodos(this.filter);
+    };
 
     removeTodo(id: number) {
         this.todos = this.todos.filter(todo => todo.id !== id);
-    }
+        this.getFilteredTodos(this.filter);
+    };
 
     completeTodo(todo: Todo) {
         todo.completed = !todo.completed;
+        this.getFilteredTodos(this.filter);
+    };
+
+    setFilter(f: string) {
+        this.filter = f;
+        this.getFilteredTodos(this.filter);
     }
 }
 
