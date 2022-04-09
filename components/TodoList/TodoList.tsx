@@ -20,7 +20,7 @@ const TodoList = observer(() => {
         }}>
             {loading
                 ? <ClipLoader
-                    color={"#2196f3"}
+                    color={"#4dabf5"}
                     loading={loading}
                     size={50}
                     css="margin: 0 auto"
