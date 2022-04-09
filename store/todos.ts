@@ -1,5 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import {Todo} from "../config/types";
+import {makeLocalStorage} from "./makeLocalStorage";
 
 class Todos {
     todos: Array<Todo> = [
