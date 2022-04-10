@@ -3,15 +3,17 @@ import {Todo} from "../../config/types";
 import {Card, CardContent, Button, Typography, Checkbox} from "@mui/material";
 import Todos from "../../store/todos";
 import {observer} from "mobx-react-lite";
+import { green, grey } from '@mui/material/colors';
 
 interface ITodoItem {
     todo: Todo
 }
 
 const TodoItem: React.FC<ITodoItem> = observer(({todo}) => {
+    const cardBgColor = todo.completed ? green[900] : grey[900];
     return (
         <Card sx={{
-            minWidth: 275,
+            backgroundColor: `${cardBgColor}`
         }}>
             <CardContent sx={{
                 display: "flex",
@@ -23,11 +25,26 @@ const TodoItem: React.FC<ITodoItem> = observer(({todo}) => {
                     paddingBottom: "0.5em"
                 }
             }}>
-                <Checkbox checked={todo.completed} onChange={() => Todos.completeTodo(todo)}/>
+                <Checkbox
+                    checked={todo.completed}
+                    onChange={() => Todos.completeTodo(todo)}
+                    sx={{
+                        color: `${grey["A100"]}`,
+                        '&.Mui-checked': {
+                            color: `${grey["A100"]}`,
+                        },
+                    }}
+                />
                 <Typography sx={{ fontSize: 14 }}>
                     {todo.title}
                 </Typography>
-                <Button size="small" onClick={() => Todos.removeTodo(todo.id)}>Delete</Button>
+                <Button
+                    color="error"
+                    size="small"
+                    onClick={() => Todos.removeTodo(todo.id)}
+                >
+                    Delete
+                </Button>
             </CardContent>
         </Card>
     );
